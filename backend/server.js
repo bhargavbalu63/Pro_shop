@@ -3,6 +3,9 @@ import express from 'express' // for this we need to add type:'module' in packag
 import products from './data/products.js' // since we use es module we use .js
 import dotenv from 'dotenv'
 dotenv.config()
+
+import connectDB from './config/db.js'
+connectDB()
 const port =process.env.PORT || 5000
 import cors from 'cors'
 const app = express()
