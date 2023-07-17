@@ -27,7 +27,7 @@ const Homescreen = () => {
 
 const {data:products, isLoading, error} =useGetProductsQuery()
 
-
+console.log(products);
 
   return (
     <>

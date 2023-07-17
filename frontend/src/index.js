@@ -8,6 +8,7 @@ import './assets/styles/index.css';
 import App from './App';
 import Homescreen from './screens/Homescreen';
 import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
 
 
 const router = createBrowserRouter(
@@ -15,6 +16,7 @@ const router = createBrowserRouter(
 <Route path='/' element={<App/>}>
 <Route index={true} path='/' element={<Homescreen/>} />
 <Route  path='/product/:id' element={<ProductScreen/>} />
+<Route  path='/cart' element={<CartScreen/>} />
 </Route>
   )
 )
