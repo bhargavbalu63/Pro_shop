@@ -20,7 +20,7 @@ const addOrderItems= asyncHandler(async( req,res)=>
     shippingPrice,
     totalPrice
    } = req.body
-  if(orderItems && orderItems.length ===0){
+  if(!orderItems || orderItems.length ===0){
     res.status(400)
     throw new Error('No order items')
   }else{
@@ -28,9 +28,9 @@ const addOrderItems= asyncHandler(async( req,res)=>
         orderItems : orderItems.map((x)=>({
             ...x,
             product:x._id,
-            _id:undefined
+           
         })),
-        user: req.user.id,
+        user: req.user._id,
         shippingAddress,
         paymentMethod,
         itemsPrice,
@@ -54,7 +54,7 @@ const addOrderItems= asyncHandler(async( req,res)=>
 const getMyOrders= asyncHandler(async( req,res)=>
 {
 
-   const orders= await Order.find({user: req.user.id})
+   const orders= await Order.find({user: req.user._id})
    res.status(200).json(orders)
 })
 
@@ -63,20 +63,19 @@ const getMyOrders= asyncHandler(async( req,res)=>
 //@access  Private
 
 
-const getOrderById= asyncHandler(async( req,res)=>
-{
-
-    const order= await Order.findById(req.params.id).populate('user', 'name email')
-
-    if(order)
-    {
-        res.status(200).json(order)
-    }else{
-        res.status(404)
-        throw new Error('order not found')
+const getOrderById = asyncHandler(async (req, res) => {
+    try {
+      const order = await Order.findById(req.params.id).populate('user', 'name email');
+  
+      if (order) {
+        res.status(200).json(order);
+      } else {
+        res.status(404).json({ message: 'Order not found' });
+      }
+    } catch (error) {
+      res.status(500).json({ message: 'Server error' });
     }
-     
-})
+  });
 
 
 //@desc    uPDATE Order to paid

@@ -13,12 +13,17 @@
     // read the jwt from cookie
     token = req.cookies.jwt
 
+ 
     if(token)
     {
         try {
             
      const decoded=  jwt.verify(token, process.env.JWT_SECRET)
+     console.log('decoded', decoded);
+     
   req.user =await User.findById(decoded.userId).select('-password');
+  console.log('user', req.user);
+  
    next();
         } catch (error) {
          console.log(error);
@@ -28,8 +33,10 @@
         }
     } else
     {
+      console.log('tokrn not found');
+      
          res.status(401);
-         throw new Error ('not authorised , no token')
+         throw new Error ('not authorised, no token')
     }
  })
 
