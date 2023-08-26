@@ -40,7 +40,7 @@ const OrderScreen = () => {
           Delivered on { order.deliveredAt}
           </Message>
         ):(
-          <Message variant='success' >Order is ready to dispatch. Relax!!</Message>
+          <Message variant='success' >Order is ready to dispatch. You can relax!!</Message>
         )}
       </ListGroup.Item>
 
@@ -118,8 +118,9 @@ const OrderScreen = () => {
             <Col>${order.totalPrice}</Col>
           </Row>
           <Message variant='success' ><b>Your order successfully placed</b></Message>
-          <ListGroup.Item>
-            <Image src={animation} />
+          <ListGroup.Item style={{border:'none', margin:'auto'}} >
+            <Image  src={animation} />
+          
           </ListGroup.Item>
         </ListGroup.Item>
 

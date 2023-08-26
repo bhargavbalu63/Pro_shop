@@ -52,6 +52,13 @@ const RegisterScreen = () => {
       try {
         const res= await register({name,email, password}).unwrap()
         dispatch(setCredentials({...res,}))
+        console.log(res.token.value);
+
+       
+        const tokenObject = res.token.value;
+      
+            // Store the token in local storage
+            localStorage.setItem('token', tokenObject);
         navigate(redirect)
     } catch (err) {
         toast.error(err?.data?.message || err.error)

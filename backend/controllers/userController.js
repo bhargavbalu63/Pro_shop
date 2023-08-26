@@ -89,7 +89,11 @@ console.log(token);
         _id:user._id,
         name:user.name,
         emial:user.email,
-        isAdmin: user.isAdmin
+        isAdmin: user.isAdmin,
+        token: {
+            value: token,
+            type: 'Bearer'
+        }
 
     })
    }else

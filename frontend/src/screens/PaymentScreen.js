@@ -47,7 +47,7 @@ const PaymentScreen = () => {
             name='pamentMethod'
             value='PayPal'
             
-           onChange={()=>alert('we are accpting only cash on delivery')}>
+           onChange={()=>alert('we are accepting only cash on delivery')}>
 
             </Form.Check>
             <Form.Check 
