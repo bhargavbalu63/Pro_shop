@@ -118,7 +118,7 @@ const PlaceOrderScreen = () => {
              <Row>
               <Col>Items: </Col>
               <Col>
-              ${cart.itemPrice}
+              {cart.cartItems.length}
               </Col>
               </Row>
             </ListGroup.Item>

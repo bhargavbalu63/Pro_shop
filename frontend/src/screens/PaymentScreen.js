@@ -46,6 +46,17 @@ const PaymentScreen = () => {
             id='PayPal'
             name='pamentMethod'
             value='PayPal'
+            
+           onChange={()=>alert('we are accpting only cash on delivery')}>
+
+            </Form.Check>
+            <Form.Check 
+            type='radio'
+            className='my-2'
+            label='Cash on Delivery'
+            id='Cash on Delivery'
+            name='pamentMethod'
+            value='Cash on Delivery'
             checked
             onChange={(e)=> setPaymentMethod(e.target.value)}>
 

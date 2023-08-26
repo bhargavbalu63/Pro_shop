@@ -8,12 +8,13 @@
 
   const  protect = asyncHandler( async (req,res, next)=>
  {
-    let token
-
-    // read the jwt from cookie
-    token = req.cookies.jwt
+  const authHeader = req.headers.authorization; // Get the Authorization header
 
  
+    const token = authHeader.split(' ')[1];
+
+  
+   
     if(token)
     {
         try {
@@ -36,7 +37,7 @@
       console.log('tokrn not found');
       
          res.status(401);
-         throw new Error ('not authorised, no token')
+         throw new Error ('not aauthorised, no token')
     }
  })
 

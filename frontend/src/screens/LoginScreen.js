@@ -42,8 +42,21 @@ const LoginScreen = () => {
     {
     e.preventDefault()
     try {
+
         const res= await login({email, password}).unwrap()
         dispatch(setCredentials({...res,}))
+         console.log(res.token.value);
+
+       
+          const tokenObject = res.token.value;
+        
+              // Store the token in local storage
+              localStorage.setItem('token', tokenObject);
+      
+              // Handle successful login, redirection, or other actions
+          
+   
+   
         navigate(redirect)
     } catch (err) {
         toast.error(err?.data?.message || err.error)

@@ -26,6 +26,7 @@ const logoutHandler= async ()=>
   try {
       await  logoutApiCall().unwrap()
       dispatch(logout());
+      localStorage.removeItem('token')
       navigate('/login')
 
   } catch (error) {

@@ -20,15 +20,24 @@ const authUser= asyncHandler(async( req,res)=>
         })
     console.log('token', token);
         // set JWT as HTTP-only cookie
-    
-        res.cookie('jwt', token)
-     console.log('token set');
+        // res.cookie('jwt', token, {
+        //     httpOnly: true,
+        //     secure:false,
+        //     sameSite: 'None',
+        //     maxAge: 30* 24* 60 *60 * 1000, // 30 days   
+        // })
      
+     console.log('token set');
+  
         res.status(200).json({
                 _id:user._id,
                 name:user.name, 
                 email:user.email,
-                isAdmin:user.isAdmin
+                isAdmin:user.isAdmin,
+                token: {
+                    value: token,
+                    type: 'Bearer'
+                }
         });
     }
     else
@@ -67,12 +76,14 @@ const registerUser= asyncHandler(async( req,res)=>
 console.log(token);
     // set JWT as HTTP-only cookie
 
-    res.cookie('jwt', token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV !== 'development',
-        sameSite: 'strict',
-        maxAge: 30* 24* 60 *60 * 1000, // 30 days   
-    })
+    // res.cookie('jwt', token, {
+    //     httpOnly: true,
+    //     secure: process.env.NODE_ENV !== 'development',
+    //     sameSite: 'strict',
+    //     maxAge: 30* 24* 60 *60 * 1000, // 30 days   
+    // })
+ 
+    // localStorage.setItem('token', token)
     res.status(201).json({
         
         _id:user._id,
@@ -93,14 +104,15 @@ console.log(token);
 //@access  private
 const logoutUser= asyncHandler(async( req,res)=>
 {
-    res.cookie('jwt', '',{
-        httpOnly:true,
-        expires :  new  Date(0)
-    })
+        // res.cookie('jwt', '',{
+        //     httpOnly:true,
+        //     expires :  new  Date(0)
+        // })
+        // localStorage.removeItem('token');
     res.status(200).json({message:'Log out successfully'})
 })  
 
-//@desc    Get user profile
+//@desc    Get user profile 
 //route    GET /api/users/profile
 //@access  Private
 const getUserProfile= asyncHandler(async( req,res)=>
